@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>Спадщина смаку</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥟</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="style.css?v=9" />
+</head>
+<body>
+
+  <!-- STICKY HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-with-pin">
+        <div class="logo-and-address">
+          <a href="#" class="header-logo">🥟 <span>Спадщина</span> смаку</a>
+          <a href="https://maps.app.goo.gl/Fwyr7DzgwrVxTBqY7" target="_blank" class="header-address mobile-address">Угорники, вул. Підпечерська, 8</a>
+        </div>
+        <a href="https://maps.app.goo.gl/Fwyr7DzgwrVxTBqY7" target="_blank" class="map-pin" title="Наша адреса на карті">📍</a>
+        <a href="https://maps.app.goo.gl/Fwyr7DzgwrVxTBqY7" target="_blank" class="header-address desktop-address">Угорники, вул. Підпечерська, 8</a>
+      </div>
+      <div class="header-actions">
+        <div class="search-box" id="searchBox">
+          <input type="text" class="search-input" id="searchInput" placeholder="Пошук товарів..." />
+          <button class="search-clear" id="searchClear" style="display:none">✕</button>
+        </div>
+        <!-- Лупа тільки для мобільних -->
+        <button class="mobile-search-btn" id="mobileSearchBtn" aria-label="Пошук">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="cart-btn" id="cartBtn">🛒 Кошик <span class="cart-count" id="cartCount">0</span></button>
+      </div>
+    </div>
+    <nav class="menu-nav desktop-nav" id="desktopNav">
+      <a href="#vareniki">Вареники</a>
+      <a href="#pelmeni">Пельмені</a>
+      <a href="#kotlety">Котлети</a>
+      <a href="#snacks">Снеки</a>
+      <a href="#mlyntsi">Млинці</a>
+      <a href="#syrnyky">Сирники</a>
+      <a href="#zrazy">Зрази</a>
+      <a href="#tsepelyni">Цепеліни</a>
+      <a href="#holubtsi">Голубці</a>
+      <a href="#chebureki">Чебуреки</a>
+      <a href="#other">Інше</a>
+      <a href="javascript:void(0)" onclick="openAboutPage()">Про нас</a>
+      <a href="javascript:void(0)" onclick="openOtherPage()">Доставка</a>
+      <button class="ing-filter-toggle" id="ingFilterToggle">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        Фільтр
+        <span class="ing-filter-count" id="ingFilterCount" style="display:none"></span>
+        <span class="ing-filter-arrow" id="ingFilterArrow">▾</span>
+      </button>
+    </nav>
+
+    <div class="ing-filter-panel" id="ingFilterPanel">
+      <div class="ing-filter-list" id="ingFilterList"></div>
+      <button class="ing-filter-reset" id="ingFilterReset">Скинути фільтр</button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU BAR -->
+  <div class="mobile-menu-bar" id="mobileMenuBar">
+    <button class="menu-toggle" id="mobileMenuBtn" aria-controls="mobileNav" aria-expanded="false" aria-label="Відкрити меню">
+      ☰ Меню
+    </button>
+    
+    <!-- MOBILE NAV -->
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="#vareniki">Вареники</a>
+      <a href="#pelmeni">Пельмені</a>
+      <a href="#kotlety">Котлети</a>
+      <a href="#snacks">Снеки</a>
+      <a href="#mlyntsi">Млинці</a>
+      <a href="#syrnyky">Сирники</a>
+      <a href="#zrazy">Зрази</a>
+      <a href="#tsepelyni">Цепеліни</a>
+      <a href="#holubtsi">Голубці</a>
+      <a href="#chebureki">Чебуреки</a>
+      <a href="#other">Інше</a>
+      <a href="javascript:void(0)" onclick="openAboutPage()">Про нас</a>
+      <a href="javascript:void(0)" onclick="openOtherPage()">Доставка</a>
+      <button class="mobile-ing-filter-toggle" id="mobileIngFilterToggle">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        Фільтр інгредієнтів
+        <span class="mobile-ing-filter-count" id="mobileIngFilterCount" style="display:none"></span>
+        <span class="mobile-ing-filter-arrow" id="mobileIngFilterArrow">▾</span>
+      </button>
+    </nav>
+
+    <div class="mobile-ing-filter-panel" id="mobileIngFilterPanel">
+      <div class="mobile-ing-filter-list" id="mobileIngFilterList"></div>
+      <button class="mobile-ing-filter-reset" id="mobileIngFilterReset">Скинути фільтр</button>
+    </div>
+  </div>
+
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <p class="hero-sub hero-anim" style="--d:0s">Домашня кухня з любов'ю</p>
+      <h1 class="hero-title hero-anim" style="--d:.2s">Спадщина смаку</h1>
+      <p class="hero-desc hero-anim" style="--d:.4s">Ручна робота · Натуральні інгредієнти · Заморожені напівфабрикати</p>
+      <a href="#menu" class="btn hero-anim" style="--d:.6s">Переглянути меню</a>
+    </div>
+  </div>
+
+  <!-- CART OVERLAY -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <!-- CART DRAWER -->
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-head">
+      <h2>🛒 Кошик</h2>
+      <button class="cart-close" id="cartClose">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty"><span>🛒</span>Кошик порожній</div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total"><span>Разом:</span><span id="cartTotal">0 грн</span></div>
+      <button class="cart-order-btn" onclick="openOrderModal()">Оформити замовлення</button>
+    </div>
+  </aside>
+
+  <main id="menu">
+
+    <!-- ВАРЕНИКИ -->
+    <section id="vareniki" class="category vareniki-bg section-bg">
+      <div class="container">
+        <h2 class="cat-title">Вареники</h2>
+        <div class="grid">
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Вареники з капустою.png" alt="Вареники з капустою">
+            </div>
+            <div class="card-body">
+              <h3>Вареники з капустою</h3>
+              <p>Начинка: капуста квашена, спеції, панірувальні сухарі, сіль, перець, цибуля, олія</p>
+              <div class="card-footer"><span class="price">350 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Вареники з вишнею.png" alt="Вареники з вишнею">
+            </div>
+            <div class="card-body">
+              <h3>Вареники з вишнею</h3>
+              <p>Начинка: вишня свіжоморожена, цукор</p>
+              <div class="card-footer"><span class="price">137 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Вареники з картоплею.png" alt="Вареники з картоплею">
+            </div>
+            <div class="card-body">
+              <h3>Вареники з картоплею</h3>
+              <p>Начинка: картопляне пюре, сіль, перець, цибуля смажена, олія</p>
+              <div class="card-footer"><span class="price">147 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Вареники з картоплею та грибами.png" alt="Вареники з картоплею та грибами">
+            </div>
+            <div class="card-body">
+              <h3>Вареники з картоплею та грибами</h3>
+              <p>Начинка: картопля відварна, шампіньони, сіль, перець, олія, цибуля</p>
+              <div class="card-footer"><span class="price">165 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Вареники з картоплею та капустою.png" alt="Вареники з картоплею та капустою">
+            </div>
+            <div class="card-body">
+              <h3>Вареники з картоплею та капустою</h3>
+              <p>Начинка: картопля відварна, капуста квашена, сіль, перець, олія, цибуля</p>
+              <div class="card-footer"><span class="price">145 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Вареники з картоплею та сиром.png" alt="Вареники з картоплею та сиром">
+            </div>
+            <div class="card-body">
+              <h3>Вареники з картоплею та сиром</h3>
+              <p>Начинка: картопля відварна, сіль, перець, сир домашній, сухарі, цибуля смажена, олія</p>
+              <div class="card-footer"><span class="price">183 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Вареники з лівером.png" alt="Вареники з лівером">
+            </div>
+            <div class="card-body">
+              <h3>Вареники з лівером</h3>
+              <p>Начинка: легені, серце, сіль, перець, цибуля, олія, сухарі</p>
+              <div class="card-footer"><span class="price">175 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Вареники з солоним сиром.png" alt="Вареники з сиром солоним">
+            </div>
+            <div class="card-body">
+              <h3>Вареники з сиром солоним</h3>
+              <p>Начинка: сир домашній, яйце, сіль, куркума</p>
+              <div class="card-footer"><span class="price">165 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Вареники з солодким сиром.png" alt="Вареники з сиром солодким">
+            </div>
+            <div class="card-body">
+              <h3>Вареники з сиром солодким</h3>
+              <p>Начинка: сир домашній, яйце домашнє, цукор</p>
+              <div class="card-footer"><span class="price">175 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Вареники з сиром та кропом.png" alt="Вареники з сиром та кропом">
+            </div>
+            <div class="card-body">
+              <h3>Вареники з сиром та кропом</h3>
+              <p>Начинка: сир домашній, сіль, кріп, яйце</p>
+              <div class="card-footer"><span class="price">175 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Вареники з телятиною.png" alt="Вареники з телятиною">
+            </div>
+            <div class="card-body">
+              <h3>Вареники з телятиною</h3>
+              <p>Начинка: м'ясо телятини відварне, бульйон, сіль, перець, олія, цибуля</p>
+              <div class="card-footer"><span class="price">245 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Вареники з чорницею.png" alt="Вареники з чорницею">
+            </div>
+            <div class="card-body">
+              <h3>Вареники з чорницею</h3>
+              <p>Начинка: чорниця свіжоморожена, цукор</p>
+              <div class="card-footer"><span class="price">395 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ПЕЛЬМЕНІ -->
+    <section id="pelmeni" class="category pelmeni-bg section-bg">
+      <div class="container">
+        <h2 class="cat-title">Пельмені</h2>
+        <p class="cat-sub">Склад тіста: борошно, вода, молоко, яйце, сіль, олія, куркума</p>
+        <div class="grid">
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Пельмені свинні.png" alt="Пельмені свинні">
+            </div>
+            <div class="card-body">
+              <h3>Пельмені свинні</h3>
+              <p>Начинка: м'ясо свинини (фарш), сіль, перець, вода, цибуля рубчаста</p>
+              <div class="card-footer"><span class="price">199 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Пельмені телячі.png" alt="Пельмені телячі">
+            </div>
+            <div class="card-body">
+              <h3>Пельмені телячі</h3>
+              <p>Начинка: м'ясо телятини (фарш), сіль, перець, вода, цибуля рубчаста</p>
+              <div class="card-footer"><span class="price">207 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Пельмені яловичинасвинина.png" alt="Пельмені яловичина/свинина">
+            </div>
+            <div class="card-body">
+              <h3>Пельмені яловичина/свинина</h3>
+              <p>Начинка: фарш яловичий або телячий 50%, фарш свинини 50%, сіль, перець, вода, цибуля</p>
+              <div class="card-footer"><span class="price">200 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Креплики з оселедцем.png" alt="Креплики з оселедцем">
+            </div>
+            <div class="card-body">
+              <h3>Креплики з оселедцем</h3>
+              <p class="seasonal-badge" style="display:inline-block;background:#333;color:#fff;font-size:.7rem;padding:2px 8px;border-radius:20px;margin-bottom:.5rem">тільки до Святвечора</p>
+              <p>Начинка: оселедець тушений, цибуля тушена, сіль, перець, сухарі, приправа 10 овочів</p>
+              <div class="card-footer"><span class="price">— грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Грибні вушка.png" alt="Грибні вушка">
+            </div>
+            <div class="card-body">
+              <h3>Грибні вушка</h3>
+              <p>Начинка: шампіньони, сіль, перець, цибуля, часник, сухарі, олія, приправа 10 овочів</p>
+              <div class="card-footer"><span class="price">— грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Пельмені курячі.png" alt="Пельмені курячі">
+            </div>
+            <div class="card-body">
+              <h3>Пельмені курячі</h3>
+              <p>Начинка: філе курки (фарш), сіль, перець, вода, цибуля рубчаста, часник, базилік</p>
+              <div class="card-footer"><span class="price">207 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ГОЛУБЦІ -->
+    <section id="holubtsi" class="category section-bg">
+      <div class="container">
+        <h2 class="cat-title">Голубці</h2>
+        <div class="grid">
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Голубці з молодої капусти.png" alt="Голубці з молодої капусти">
+            </div>
+            <div class="card-body">
+              <h3>Голубці з молодої капусти <em style="font-size:.8rem;font-weight:400">(посезонно)</em></h3>
+              <p>Начинка: листя пропарене з молодої капусти, рис пропарений, фарш свинний, сіль, перець, морква, цибуля, олія</p>
+              <div class="card-footer"><span class="price">— грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Голубці з рисом та фаршем.png" alt="Голубці з рисом та фаршем">
+            </div>
+            <div class="card-body">
+              <h3>Голубці з рисом та фаршем</h3>
+              <p>Начинка: листя капусти пропарене, рис пропарений, фарш свинний, сіль, перець, морква, цибуля, олія</p>
+              <div class="card-footer"><span class="price">160 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Голубці пісні з рисом та овочами.png" alt="Голубці пісні з рисом та овочами">
+            </div>
+            <div class="card-body">
+              <h3>Голубці пісні з рисом та овочами</h3>
+              <p>Начинка: листя капусти пропарене, рис пропарений, сіль, перець, морква, цибуля, олія</p>
+              <div class="card-footer"><span class="price">135 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ЗРАЗИ -->
+    <section id="zrazy" class="category section-bg">
+      <div class="container">
+        <h2 class="cat-title">Зрази Картопляні</h2>
+        <p class="cat-sub">Склад тіста: картопляне пюре відварне, борошно, яйце, сіль, крохмаль</p>
+        <div class="grid">
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Зрази з капустою та фаршем.png" alt="Зрази з капустою та фаршем">
+            </div>
+            <div class="card-body">
+              <h3>Зрази з капустою та фаршем</h3>
+              <p>Начинка: капуста білокачанна тушкована, фарш свинний, сіль, олія, цибуля, свіжий кріп, часник, панірувальні сухарі, приправа 10 овочів</p>
+              <div class="card-footer"><span class="price">— грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Зрази з грибною начинкою.png" alt="Зрази з грибною начинкою">
+            </div>
+            <div class="card-body">
+              <h3>Зрази з грибною начинкою</h3>
+              <p>Начинка: шампіньони тушковані, сіль, перець, цибуля, олія, панірувальні сухарі</p>
+              <div class="card-footer"><span class="price">192 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Зрази з телячого фаршу.png" alt="Зрази з телячого фаршу">
+            </div>
+            <div class="card-body">
+              <h3>Зрази з телячого фаршу</h3>
+              <p>Начинка: фарш телячий, цибуля, вода, сіль, перець, часник, кріп</p>
+              <div class="card-footer"><span class="price">260 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Зрази з фаршем.png" alt="Зрази з фаршем">
+            </div>
+            <div class="card-body">
+              <h3>Зрази з фаршем</h3>
+              <p>Начинка: фарш свинний (просмажений), цибуля, вода, сіль, перець, часник, кріп</p>
+              <div class="card-footer"><span class="price">178 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/зрази З яйцем та плавленим сиром.png" alt="Зрази з яйцем та плавленим сиром">
+            </div>
+            <div class="card-body">
+              <h3>Зрази з яйцем та плавленим сиром</h3>
+              <p>Начинка: сирок плавлений, яйце відварне, майонез, сіль, перець, цибуля, олія</p>
+              <div class="card-footer"><span class="price">178 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- КОТЛЕТИ -->
+    <section id="kotlety" class="category section-bg">
+      <div class="container">
+        <h2 class="cat-title">Котлети</h2>
+        <div class="grid">
+
+          <div class="card">
+            <div class="card-emoji">🌭</div>
+            <div class="card-body">
+              <h3>Ковбаски картопляні</h3>
+              <p>Склад: картопля, смалець, шкварки, цибуля сира та тушкована, сметана, яйці, сіль, перець, приправа 10 овочів, молоко, манка, кишка свиняча шліфована</p>
+              <div class="card-footer"><span class="price">185 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Котлета по-київськи.png" alt="Котлета по-київськи">
+            </div>
+            <div class="card-body">
+              <h3>Котлета по-київськи</h3>
+              <p>Склад: філе куряче, масло вершкове, сіль, перець, яйце, борошно, сухарі панірувальні</p>
+              <div class="card-footer"><span class="price">335 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-emoji">🐄</div>
+            <div class="card-body">
+              <h3>Котлети бургерні яловичі/телячі</h3>
+              <p>Склад: фарш із телятини або яловичини, яйце, перець, олія, цибуля рубчаста, сіль, петрушка, приправа 10 овочів</p>
+              <div class="card-footer"><span class="price">353 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-emoji">🐷</div>
+            <div class="card-body">
+              <h3>Котлета бургерна свинна</h3>
+              <p>Начинка: фарш з свинини, яйце, перець, олія, цибуля рубчаста, сіль, петрушка, приправа 10 овочів</p>
+              <div class="card-footer"><span class="price">— грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-emoji">🐔</div>
+            <div class="card-body">
+              <h3>Котлети курячі</h3>
+              <p>Склад: курячий фарш, яйце, перець, часник, цибуля рубчаста, сіль, базилік</p>
+              <div class="card-footer"><span class="price">250 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-emoji">🐷</div>
+            <div class="card-body">
+              <h3>Котлети свинні</h3>
+              <p>Склад: фарш свинний, яйце, сіль, перець, цибуля, батон, молоко, олія, часник, приправа 10 овочів, панірувальні сухарі</p>
+              <div class="card-footer"><span class="price">250 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- СНЕКИ -->
+    <section id="snacks" class="category section-bg">
+      <div class="container">
+        <h2 class="cat-title">Снеки</h2>
+        <div class="grid">
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Кровянка.png" alt="Кровянка">
+            </div>
+            <div class="card-body">
+              <h3>Кровянка</h3>
+              <p>Склад: кров свиняча, сало, цибуля, спеції</p>
+              <div class="card-footer"><span class="price">171 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Нагетси з куряного філе в паніровці.png" alt="Нагетси з куряного філе в паніровці">
+            </div>
+            <div class="card-body">
+              <h3>Нагетси з куряного філе в паніровці</h3>
+              <p>Склад: філе куряче, соєвий соус, олія оливкова, сухий часник, сіль, приправа до курки, борошно, сухарі панірувальні, паприка, прованські трави, кунжут</p>
+              <div class="card-footer"><span class="price">335 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Палюшки картопляні.png" alt="Палюшки картопляні">
+            </div>
+            <div class="card-body">
+              <h3>Палюшки картопляні</h3>
+              <p>Склад: картопляне пюре відварне, борошно, яйце, сіль, перець, крохмаль</p>
+              <div class="card-footer"><span class="price">151 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Сирні палички в паніровці.png" alt="Сирні палички в паніровці">
+            </div>
+            <div class="card-body">
+              <h3>Сирні палички в паніровці</h3>
+              <p>Склад: сир моцарела, яйце, борошно, сухарі панірувальні, кунжут, паприка, сухий часник, прованські трави</p>
+              <div class="card-footer"><span class="price">330 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-image">
+              <img src="Фото їжі/Стріпси з хурмяного філе в хрумкій паніровці.png" alt="Стріпси з хурмяного філе в хрумкій паніровці">
+            </div>
+            <div class="card-body">
+              <h3>Стріпси з хурмяного філе в хрумкій паніровці</h3>
+              <p>Склад: філе куряче, соєвий соус, вода мінеральна, сухий часник, паприка, сіль, приправа до курки, оливкова олія, яйце, борошно, прованські трави, кукурудзяні пластівці</p>
+              <div class="card-footer"><span class="price">346 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- МЛИНЦІ -->
+    <section id="mlyntsi" class="category section-bg">
+      <div class="container">
+        <h2 class="cat-title">Млинці</h2>
+        <p class="cat-sub">Склад тіста: молоко, яйце, цукор, олія, куркума, борошно, сіль</p>
+        <div class="grid">
+
+          <div class="card">
+            <div class="card-emoji">🥩</div>
+            <div class="card-body">
+              <h3>Млинці з м'ясом телятини</h3>
+              <p>Начинка: м'ясо телятини відварне, сіль, перець, цибуля тушкована</p>
+              <div class="card-footer"><span class="price">250 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-emoji">🍯</div>
+            <div class="card-body">
+              <h3>Млинці з солодким сиром</h3>
+              <p>Начинка: сир домашній, яйце, цукор, ванільний цукор</p>
+              <div class="card-footer"><span class="price">173 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-emoji">🍎</div>
+            <div class="card-body">
+              <h3>Млинці з яблуком та карамелізованим горіхом</h3>
+              <p>Начинка: яблуко, цукор, карамелізований горіх, кориця</p>
+              <div class="card-footer"><span class="price">183 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- СИРНИКИ -->
+    <section id="syrnyky" class="category section-bg">
+      <div class="container">
+        <h2 class="cat-title">Сирники</h2>
+        <div class="grid">
+
+          <div class="card">
+            <div class="card-emoji">🧁</div>
+            <div class="card-body">
+              <h3>Сирники</h3>
+              <p>Склад: сир домашній, манка, яйце, цукор, молоко, ванільний цукор, порошок до печива, куркума</p>
+              <div class="card-footer"><span class="price">196 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-emoji">🍇</div>
+            <div class="card-body">
+              <h3>Сирнички з родзинками</h3>
+              <p>Склад: сир домашній, манка, яйце, цукор, молоко, ванільний цукор, родзинки</p>
+              <div class="card-footer"><span class="price">205 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-emoji">🍫</div>
+            <div class="card-body">
+              <h3>Сирнички з шоколадом</h3>
+              <p>Склад: сир домашній, манка, яйце, цукор, молоко, ванільний цукор, шоколад</p>
+              <div class="card-footer"><span class="price">235 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ЦЕПЕЛІНИ -->
+    <section id="tsepelyni" class="category section-bg">
+      <div class="container">
+        <h2 class="cat-title">Цепеліни</h2>
+        <p class="cat-sub">Склад тіста: картопляне пюре відварне, борошно, яйце, сіль, крохмаль</p>
+        <div class="grid">
+
+          <div class="card">
+            <div class="card-emoji">🍄</div>
+            <div class="card-body">
+              <h3>Цепеліни з грибною начинкою</h3>
+              <p>Начинка: шампіньони, сіль, перець, цибуля рубчаста, олія, приправа 10 овочів</p>
+              <div class="card-footer"><span class="price">177 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-emoji">🥩</div>
+            <div class="card-body">
+              <h3>Цепеліни з м'ясом телятини</h3>
+              <p>Начинка: м'ясо телятини відварне, сіль, перець, цибуля рубчаста, олія</p>
+              <div class="card-footer"><span class="price">203 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-emoji">🧀</div>
+            <div class="card-body">
+              <h3>Цепеліни з сиром та кропом</h3>
+              <p>Начинка: сир, яйце, сіль, кріп свіжий</p>
+              <div class="card-footer"><span class="price">175 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ЧЕБУРЕКИ -->
+    <section id="chebureki" class="category section-bg">
+      <div class="container">
+        <h2 class="cat-title">Чебуреки</h2>
+        <p class="cat-sub">Склад тіста: борошно, вода, сіль, цукор, олія</p>
+        <div class="grid">
+
+          <div class="card">
+            <div class="card-emoji">🥩</div>
+            <div class="card-body">
+              <h3>Чебуреки з фаршем</h3>
+              <p>Начинка: фарш свинний, цибуля, сіль, перець, петрушка, часник</p>
+              <div class="card-footer"><span class="price">183 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-emoji">🧀</div>
+            <div class="card-body">
+              <h3>Чебуреки з сиром сулугуні</h3>
+              <p>Начинка: сир моцарела 50%, сир сулугуні 50%</p>
+              <div class="card-footer"><span class="price">207 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-emoji">🥩</div>
+            <div class="card-body">
+              <h3>Чебуреки з фаршем та сиром сулугуні</h3>
+              <p>Начинка: фарш свинний, сир моцарела та сулугуні</p>
+              <div class="card-footer"><span class="price">193 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ІНШЕ -->
+    <section id="other" class="category section-bg">
+      <div class="container">
+        <h2 class="cat-title">Інше</h2>
+        <div class="grid">
+
+          <div class="card">
+            <div class="card-emoji">🍚</div>
+            <div class="card-body">
+              <h3>Тефтелі свинні з рисом</h3>
+              <p>Склад: фарш свинний, сіль, цибуля, яйце, рис пропарений</p>
+              <div class="card-footer"><span class="price">234 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-emoji">🥣</div>
+            <div class="card-body">
+              <h3>Фрикадельки для супів</h3>
+              <p>Склад: фарш свинний, сіль, перець, цибуля, яйце</p>
+              <div class="card-footer"><span class="price">270 грн/кг</span><button class="add-btn" onclick="addToCart(this)">+ В кошик</button></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+    <!-- ДОСТАВКА - ОКРЕМА СТОРІНКА -->
+    <div class="other-page-overlay" id="otherPageOverlay" onclick="closeOtherPage()"></div>
+    <div class="other-page" id="otherPage">
+      <button class="other-page-close" onclick="closeOtherPage()">✕</button>
+      <div class="other-page-content">
+        <h2 class="cat-title">Доставка та самовивіз</h2>
+        <p class="cat-sub">Оберіть зручний для вас спосіб отримання замовлення</p>
+
+        <div class="dtabs">
+          <button class="dtab active" data-tab="pickup">🏠 Самовивіз</button>
+          <button class="dtab" data-tab="city">🚗 По місту</button>
+        </div>
+
+        <div class="dpanel active" id="tab-pickup">
+          <div class="dpanel-inner">
+            <div class="dpanel-left">
+              <div class="dpanel-emoji">🏠</div>
+              <h3>Самовивіз — безкоштовно</h3>
+              <p>Замовляйте заздалегідь і заберіть у зручний час. Попередній дзвінок обов'язковий.</p>
+            </div>
+            <div class="dpanel-right">
+              <div class="dinfo-row"><span class="dinfo-icon">📍</span><div><strong>Адреса</strong><span>Угорники, вул. Підпечерська, 8</span></div></div>
+              <div class="dinfo-row"><span class="dinfo-icon">⏰</span><div><strong>Години роботи</strong><span>Пн–Пт: 9:00–18:00 &nbsp;·&nbsp; Сб–Нд: 10:00–16:00</span></div></div>
+              <div class="dinfo-row"><span class="dinfo-icon">✅</span><div><strong>Вартість</strong><span>Безкоштовно</span></div></div>
+              <div class="dinfo-row"><span class="dinfo-icon">📞</span><div><strong>Контакт</strong><span>+38 (066) 889-60-36</span></div></div>
+              <div class="map-wrap">
+                <iframe
+                  src="https://maps.google.com/maps?q=48.9174219,24.7628646&z=17&output=embed"
+                  width="100%" height="200" style="border:0;border-radius:12px;"
+                  allowfullscreen loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dpanel" id="tab-city">
+          <div class="dpanel-inner">
+            <div class="dpanel-left">
+              <div class="dpanel-emoji">🚗</div>
+              <h3>Доставка по Рівному</h3>
+              <p>Привеземо свіжозаморожену продукцію прямо до ваших дверей у термосумці.</p>
+            </div>
+            <div class="dpanel-right">
+              <div class="dinfo-row"><span class="dinfo-icon">💰</span><div><strong>До 500 грн</strong><span>Доставка 50 грн</span></div></div>
+              <div class="dinfo-row"><span class="dinfo-icon">🎉</span><div><strong>Від 500 грн</strong><span>Доставка безкоштовна</span></div></div>
+              <div class="dinfo-row"><span class="dinfo-icon">⏰</span><div><strong>Час доставки</strong><span>Замовлення до 14:00 — доставка в той же день</span></div></div>
+              <div class="dinfo-row"><span class="dinfo-icon">📦</span><div><strong>Упаковка</strong><span>Продукція у термосумці</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="delivery-note">
+          <span>📞</span>
+          <p>Для оформлення замовлення телефонуйте або пишіть у Viber/Telegram: <strong>+38 (066) 889-60-36</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ПРО НАС - ОКРЕМА СТОРІНКА -->
+    <div class="about-page-overlay" id="aboutPageOverlay" onclick="closeAboutPage()"></div>
+    <div class="about-page" id="aboutPage">
+      <button class="about-page-close" onclick="closeAboutPage()">✕</button>
+      <div class="about-page-content">
+        <h2 class="cat-title">Про нас</h2>
+        <p class="cat-sub">Спадщина смаку — домашня кухня з любов'ю</p>
+
+        <div class="about-grid">
+          <div class="about-card">
+            <div class="about-icon">🏆</div>
+            <h3>Більше 10 років досвіду</h3>
+            <p>Ми виробляємо домашні напівфабрикати вже понад десятиліття, зберігаючи традиційні рецепти та якість.</p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-icon">❤️</div>
+            <h3>Тисячі задоволених клієнтів</h3>
+            <p>Наші покупці повертаються до нас знову і знову, адже ми готуємо з душею та використовуємо тільки натуральні інгредієнти.</p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-icon">🥟</div>
+            <h3>Ручна робота</h3>
+            <p>Кожен вареник, пельмень та котлета виготовлені вручну з дотриманням традиційних технологій.</p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-icon">🌿</div>
+            <h3>Натуральні інгредієнти</h3>
+            <p>Ми використовуємо тільки свіжі та якісні продукти без консервантів та штучних добавок.</p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-icon">❄️</div>
+            <h3>Свіжозаморожена продукція</h3>
+            <p>Наші напівфабрикати заморожуються одразу після виготовлення, зберігаючи всі корисні властивості та смак.</p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-icon">🏠</div>
+            <h3>Сімейне виробництво</h3>
+            <p>Ми — сімейний бізнес, який передає рецепти з покоління в покоління та дбає про кожного клієнта.</p>
+          </div>
+        </div>
+
+        <div class="about-story">
+          <h3>Наша історія</h3>
+          <p>Все почалося з любові до домашньої кухні та бажання ділитися смаком справжніх українських страв. Понад 10 років тому ми почали виготовляти вареники та пельмені за традиційними сімейними рецептами. Сьогодні ми пишаємося тим, що наша продукція прикрашає столи тисяч родин по всій Україні.</p>
+          <p>Кожен день ми працюємо над тим, щоб ви могли насолоджуватися смаком домашньої їжі, не витрачаючи години на приготування. Наша місія — зберегти традиції української кухні та зробити їх доступними для кожного.</p>
+        </div>
+
+        <div class="about-contact">
+          <h3>Зв'яжіться з нами</h3>
+          <div class="about-contact-info">
+            <div class="about-contact-item">
+              <span class="about-contact-icon">📞</span>
+              <div>
+                <strong>Телефон</strong>
+                <p>+38 (066) 889-60-36</p>
+              </div>
+            </div>
+            <div class="about-contact-item">
+              <span class="about-contact-icon">📍</span>
+              <div>
+                <strong>Адреса</strong>
+                <p>Угорники, вул. Підпечерська, 8</p>
+              </div>
+            </div>
+            <div class="about-contact-item">
+              <span class="about-contact-icon">⏰</span>
+              <div>
+                <strong>Години роботи</strong>
+                <p>Пн–Пт: 9:00–18:00<br>Сб–Нд: 10:00–16:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>🥟 Спадщина смаку</h4>
+        <p>Домашні напівфабрикати з любов'ю</p>
+        <p class="footer-note">Весь товар заморожений. Ціни вказані за 1 кг продукції.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Навігація</h4>
+        <div class="footer-links">
+          <a href="javascript:void(0)" onclick="openAboutPage()">Про нас</a>
+          <a href="javascript:void(0)" onclick="openOtherPage()">Доставка</a>
+          <a href="#menu">Меню</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Контакти</h4>
+        <p>📞 +38 (066) 889-60-36</p>
+        <p>📍 Угорники, вул. Підпечерська, 8</p>
+        <div class="footer-social">
+          <a href="viber://chat?number=%2B380668896036" target="_blank" title="Viber" class="social-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.892.283c-5.195 0-9.41 4.214-9.41 9.41 0 1.584.392 3.075 1.085 4.383L3.05 20.505l6.672-1.435c1.26.627 2.677.977 4.17.977 5.195 0 9.41-4.214 9.41-9.41S18.087.283 12.892.283zm5.438 13.11c-.224.627-1.32 1.173-1.811 1.224-.469.05-.896.224-3.017-.627-2.55-1.02-4.186-3.644-4.313-3.813-.127-.17-.996-1.326-.996-2.528 0-1.203.627-1.794.85-2.04.224-.245.489-.306.652-.306.163 0 .326.001.469.009.15.007.352-.057.55.42.203.49.692 1.692.753 1.814.061.122.102.265.02.428-.081.163-.122.265-.245.408-.122.143-.257.32-.367.428-.122.122-.249.254-.107.498.143.245.635 1.049 1.364 1.699.938.836 1.729 1.096 1.975 1.219.245.122.388.102.53-.061.143-.163.612-.714.775-.959.163-.245.326-.204.55-.122.224.081 1.425.672 1.669.794.245.122.408.184.469.285.061.102.061.581-.163 1.208z"/>
+            </svg>
+          </a>
+          <a href="https://api.whatsapp.com/send/?phone=380668896036&text&type=phone_number&app_absent=0" target="_blank" title="WhatsApp" class="social-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+          </a>
+          <a href="https://t.me/+380668896036" target="_blank" title="Telegram" class="social-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.14.121.099.155.232.171.326.016.093.036.306.02.472z"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/domashnya_kuhnya_group/" target="_blank" title="Instagram" class="social-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com/@domashnya_kuhnya_group?_r=1&_t=ZS-96KdC1vZL7t" target="_blank" title="TikTok" class="social-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/svizhe.if?locale=uk_UA" target="_blank" title="Facebook" class="social-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Спадщина смаку. Всі права захищені.</p>
+    </div>
+  </footer>
+
+  <!-- ORDER MODAL -->
+  <div class="modal-overlay" id="orderModalOverlay" onclick="closeOrderModal()"></div>
+  <div class="ingredient-modal" id="orderModal" style="max-width:560px">
+    <button class="modal-close" onclick="closeOrderModal()">✕</button>
+    <div class="modal-content" style="text-align:left">
+      <h3 style="text-align:center;margin-bottom:1.5rem">🛋 Оформлення замовлення</h3>
+      <form id="orderForm" onsubmit="submitOrder(event)">
+        <div class="order-row">
+          <div class="order-field">
+            <label>Прізвище *</label>
+            <input type="text" id="oLastName" placeholder="Ваше прізвище" required />
+          </div>
+          <div class="order-field">
+            <label>Ім’я *</label>
+            <input type="text" id="oFirstName" placeholder="Ваше ім’я" required />
+          </div>
+        </div>
+        <div class="order-field">
+          <label>Телефон *</label>
+          <input type="tel" id="oPhone" placeholder="+38 (0__) ___-__-__" required />
+        </div>
+        <div class="order-field">
+          <label>Спосіб оплати *</label>
+          <div class="order-radio-group">
+            <label class="order-radio"><input type="radio" name="payment" value="card" required /> 💳 Картка</label>
+            <label class="order-radio"><input type="radio" name="payment" value="cash" /> 💵 Готівка</label>
+          </div>
+        </div>
+        <div class="order-field">
+          <label>Спосіб отримання *</label>
+          <div class="order-radio-group">
+            <label class="order-radio"><input type="radio" name="delivery" value="pickup" required onchange="toggleAddress()" /> 🏠 Самовивіз</label>
+            <label class="order-radio"><input type="radio" name="delivery" value="city" onchange="toggleAddress()" /> 🚗 Доставка по місту</label>
+          </div>
+        </div>
+        <div class="order-field" id="addressField" style="display:none">
+          <label>Адреса *</label>
+          <input type="text" id="oAddress" placeholder="вулиця, будинок, квартира" />
+        </div>
+        <div class="order-field">
+          <label>Коментар <span style="color:var(--muted);font-weight:400;font-size:.8rem">(необов’язково)</span></label>
+          <textarea id="oComment" placeholder="Бажання, уточнення..." rows="3"></textarea>
+        </div>
+        <button type="submit" class="cart-order-btn" style="margin-top:.5rem">Підтвердити замовлення</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- INGREDIENT MODALS -->
+  <div class="modal-overlay" id="ingredientModalOverlay" onclick="closeIngredientModal()"></div>
+  
+  <div class="ingredient-modal" id="ingredientModal">
+    <button class="modal-close" onclick="closeIngredientModal()">✕</button>
+    <div class="modal-content" id="ingredientModalContent"></div>
+  </div>
+
+  <!-- ORDER SUCCESS / RECEIPT MODAL -->
+  <div class="modal-overlay" id="receiptModalOverlay" onclick="closeReceiptModal()"></div>
+  <div class="ingredient-modal" id="receiptModal" style="max-width:480px">
+    <button class="modal-close" onclick="closeReceiptModal()">✕</button>
+    <div class="modal-content" id="receiptContent" style="text-align:left"></div>
+  </div>
+
+  <!-- Hidden print area for PDF -->
+  <div id="receiptPrintArea" style="display:none"></div>
+
+  <script src="script.js?v=3" defer></script>
+
+  <!-- CONTACT BUTTON & MODAL -->
+  <div class="contact-float" id="contactFloat">
+    <button class="contact-float-btn" id="contactFloatBtn" title="Зворотній зв'язок">
+      💬
+      <span class="contact-badge" id="contactBadge"></span>
+    </button>
+    <div class="contact-toast" id="contactToast">1 непрочитане повідомлення</div>
+    <div class="contact-popup" id="contactPopup">
+      <!-- Шапка чату -->
+      <div class="chat-header">
+        <div class="chat-header-avatar">🥟</div>
+        <div class="chat-header-info">
+          <span class="chat-header-name">Спадщина смаку</span>
+          <span class="chat-header-status"><i class="chat-online-dot"></i>Онлайн</span>
+        </div>
+        <button class="contact-popup-close" id="contactPopupClose">✕</button>
+      </div>
+
+      <!-- Область повідомлень -->
+      <div class="chat-body" id="chatBody">
+        <!-- Повідомлення менеджера -->
+        <div class="chat-msg-row">
+          <div class="chat-avatar">🥟</div>
+          <div class="chat-bubble" id="chatBubble">
+            <span class="chat-typing" id="chatTyping">
+              <span></span><span></span><span></span>
+            </span>
+            <span class="chat-text" id="chatText" style="display:none">
+              Доброго дня! 👋<br>Якщо маєте запитання — звʼяжіться з нами зручним способом 😊
+            </span>
+            <span class="chat-time">щойно</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Поле для введення повідомлення -->
+      <div class="chat-input-area">
+        <form class="chat-input-form" id="chatInputForm" onsubmit="sendChatMessage(event)">
+          <input type="text" id="chatUserName" placeholder="Ваше ім'я" class="chat-message-input" required style="margin-bottom: .5rem;">
+          <input type="tel" id="chatUserPhone" placeholder="Телефон" class="chat-message-input" required style="margin-bottom: .5rem;">
+          <div style="display: flex; gap: .5rem; align-items: center;">
+            <input type="text" id="chatMessageInput" placeholder="Напишіть ваше питання..." class="chat-message-input" required>
+            <button type="submit" class="chat-send-btn" title="Відправити">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Кнопки соцмереж -->
+      <div class="chat-footer">
+        <p class="chat-footer-label">Оберіть спосіб зв'язку:</p>
+        <div class="contact-popup-links">
+          <a href="viber://chat?number=%2B380668896036" class="contact-popup-link viber" title="Viber">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.892.283c-5.195 0-9.41 4.214-9.41 9.41 0 1.584.392 3.075 1.085 4.383L3.05 20.505l6.672-1.435c1.26.627 2.677.977 4.17.977 5.195 0 9.41-4.214 9.41-9.41S18.087.283 12.892.283zm5.438 13.11c-.224.627-1.32 1.173-1.811 1.224-.469.05-.896.224-3.017-.627-2.55-1.02-4.186-3.644-4.313-3.813-.127-.17-.996-1.326-.996-2.528 0-1.203.627-1.794.85-2.04.224-.245.489-.306.652-.306.163 0 .326.001.469.009.15.007.352-.057.55.42.203.49.692 1.692.753 1.814.061.122.102.265.02.428-.081.163-.122.265-.245.408-.122.143-.257.32-.367.428-.122.122-.249.254-.107.498.143.245.635 1.049 1.364 1.699.938.836 1.729 1.096 1.975 1.219.245.122.388.102.53-.061.143-.163.612-.714.775-.959.163-.245.326-.204.55-.122.224.081 1.425.672 1.669.794.245.122.408.184.469.285.061.102.061.581-.163 1.208z"/></svg>
+          </a>
+          <a href="https://api.whatsapp.com/send/?phone=380668896036&text&type=phone_number&app_absent=0" target="_blank" class="contact-popup-link whatsapp" title="WhatsApp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </a>
+          <a href="https://t.me/+380668896036" target="_blank" class="contact-popup-link telegram" title="Telegram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.14.121.099.155.232.171.326.016.093.036.306.02.472z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/domashnya_kuhnya_group/" target="_blank" class="contact-popup-link instagram" title="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/svizhe.if?locale=uk_UA" target="_blank" class="contact-popup-link facebook" title="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+        <div class="contact-popup-divider">або</div>
+        <a href="tel:+380668896036" class="contact-popup-phone">
+          📞 +38 (066) 889-60-36
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIKTOK PROMO BUTTON -->
+  <div class="tiktok-float" id="tiktokFloat">
+    
+    <!-- Банер зі знижкою (розгортається при першому відкритті) -->
+    <div class="tiktok-banner" id="tiktokBanner">
+      <button class="tiktok-banner-close" id="tiktokBannerClose">✕</button>
+      <div class="tiktok-banner-icon">🎵</div>
+      <div class="tiktok-banner-text">
+        <strong>-5% знижка!</strong>
+        <span>Підпишись на наш TikTok та отримай знижку на замовлення</span>
+      </div>
+      <button class="tiktok-banner-btn" id="tiktokBannerBtn">Дізнатись більше</button>
+    </div>
+
+    <!-- Кнопка TikTok -->
+    <button class="tiktok-btn" id="tiktokBtn" title="TikTok -5% знижка">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+      </svg>
+      <span class="tiktok-btn-badge">-5%</span>
+    </button>
+  </div>
+
+  <!-- TIKTOK POPUP -->
+  <div class="tiktok-overlay" id="tiktokOverlay" onclick="closeTiktokPopup()"></div>
+  <div class="tiktok-popup" id="tiktokPopup">
+    <button class="tiktok-popup-close" onclick="closeTiktokPopup()">✕</button>
+    <div class="tiktok-popup-icon">🎵</div>
+    <h3 class="tiktok-popup-title">Отримай <span>-5% знижку</span></h3>
+    <p class="tiktok-popup-sub">Підпишись на наш TikTok і отримай знижку на наступне замовлення!</p>
+    <div class="tiktok-steps">
+      <div class="tiktok-step">
+        <span class="tiktok-step-num">1</span>
+        <div>
+          <strong>Перейдіть в TikTok</strong>
+          <p>Натисніть кнопку нижче щоб відкрити наш профіль</p>
+          <a href="https://www.tiktok.com/@domashnya_kuhnya_group" target="_blank" class="tiktok-link-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+            @domashnya_kuhnya_group
+          </a>
+        </div>
+      </div>
+      <div class="tiktok-step">
+        <span class="tiktok-step-num">2</span>
+        <div>
+          <strong>Підпишіться</strong>
+          <p>Натисніть кнопку "Підписатись" на нашій сторінці</p>
+        </div>
+      </div>
+      <div class="tiktok-step">
+        <span class="tiktok-step-num">3</span>
+        <div>
+          <strong>Зробіть скріншот</strong>
+          <p>Зробіть скріншот підписки на наш акаунт</p>
+        </div>
+      </div>
+      <div class="tiktok-step">
+        <span class="tiktok-step-num">4</span>
+        <div>
+          <strong>Відправте нам</strong>
+          <p>Надішліть скріншот у будь-який зручний спосіб зв'язку</p>
+          <div class="tiktok-contacts">
+            <a href="viber://chat?number=%2B380668896036" class="tiktok-contact-link">Viber</a>
+            <a href="https://t.me/+380668896036" target="_blank" class="tiktok-contact-link">Telegram</a>
+            <a href="https://api.whatsapp.com/send/?phone=380668896036" target="_blank" class="tiktok-contact-link">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+      <div class="tiktok-step">
+        <span class="tiktok-step-num">🎉</span>
+        <div>
+          <strong>Отримайте знижку!</strong>
+          <p>Ми підтвердимо підписку і нарахуємо вам <strong>-5%</strong> на замовлення</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCROLL ARROWS -->
+  <div class="scroll-arrows">
+    <button class="scroll-arrow" id="arrowUp">&#8679;</button>
+    <button class="scroll-arrow" id="arrowDown">&#8681;</button>
+  </div>
+  <!-- MOBILE SEARCH MODAL -->
+  <div class="mobile-search-overlay" id="mobileSearchOverlay"></div>
+  <div class="mobile-search-modal" id="mobileSearchModal">
+    <div class="mobile-search-header">
+      <div class="mobile-search-input-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" class="mobile-search-input" id="mobileSearchInput" placeholder="Пошук товарів..." autocomplete="off" />
+        <button class="mobile-search-clear" id="mobileSearchClear" style="display:none">✕</button>
+      </div>
+      <button class="mobile-search-close" id="mobileSearchClose">Скасувати</button>
+    </div>
+    <div class="mobile-search-body" id="mobileSearchBody">
+      <p class="mobile-search-hint">Введіть назву товару або інгредієнт</p>
+    </div>
+  </div>
+
+</body>
+</html>
